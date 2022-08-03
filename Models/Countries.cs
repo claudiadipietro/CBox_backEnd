@@ -10,5 +10,6 @@ public class Countries {
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
     public string country { get; set; } = null!;
+    public Boolean available { get; set; } = false;
 
 }
