@@ -19,6 +19,17 @@ using Country.Services;
             return await _mongoDBService.GetAsync();
         }
 
+        [HttpGet("countriesFiltered")]
+        public async Task<List<Countries>> GetCountriesSelected() {
+            return await _mongoDBService.GetAsync();
+        }
+
+        [HttpPut("randomizeCountries")]
+         public async Task<IActionResult> PutRandom(){
+            await _mongoDBService.ModifyRandom();
+            return NoContent();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Countries countries) {
             await _mongoDBService.CreateAsync(countries);
