@@ -8,43 +8,43 @@ using Country.Services;
     [Route("api/[controller]")]
     public class CountryController: Controller {
         
-        private readonly MongoDBService _mongoDBService;
+        private readonly CountryDBService _countryDBService;
 
-        public CountryController(MongoDBService mongoDBService) {
-            _mongoDBService = mongoDBService;
+        public CountryController(CountryDBService countryDBService) {
+            _countryDBService = countryDBService;
         }
 
         [HttpGet]
         public async Task<List<Countries>> Get() {
-            return await _mongoDBService.GetAsync();
+            return await _countryDBService.GetAsync();
         }
 
         [HttpGet("countriesFiltered")]
         public async Task<List<Countries>> GetCountriesSelected() {
-            return await _mongoDBService.GetAsync();
+            return await _countryDBService.GetAsync();
         }
 
         [HttpPut("randomizeCountries")]
          public async Task<IActionResult> PutRandom(){
-            await _mongoDBService.ModifyRandom();
+            await _countryDBService.ModifyRandom();
             return NoContent();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Countries countries) {
-            await _mongoDBService.CreateAsync(countries);
+            await _countryDBService.CreateAsync(countries);
             return CreatedAtAction(nameof(Get), countries);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> AddToCountries(string id, [FromBody] string countryId) {
-            await _mongoDBService.AddToCountriesAsync(id, countryId);
+            await _countryDBService.AddToCountriesAsync(id, countryId);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) {
-            await _mongoDBService.DeleteAsync(id);
+            await _countryDBService.DeleteAsync(id);
             return NoContent();
         }
 

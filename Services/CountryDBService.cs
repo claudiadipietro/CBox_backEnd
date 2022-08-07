@@ -5,11 +5,10 @@ using MongoDB.Bson;
 
 namespace Country.Services;
 
-public class MongoDBService {
-
+public class CountryDBService {
     private readonly IMongoCollection<Countries> _countriesCollection;
 
-    public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings) {
+    public CountryDBService(IOptions<MongoDBSettings> mongoDBSettings) {
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _countriesCollection = database.GetCollection<Countries>(mongoDBSettings.Value.CollectionName);
